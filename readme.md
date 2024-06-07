@@ -46,14 +46,19 @@ SERVER_PORT=8081
 ```
 ## Uso
 
+Antes de construir crear una red compartida para los contenedores:
+```shell
+docker network create backend
+```
+
 Construir y ejecutar la aplicación con Docker Compose
 Construye y ejecuta los contenedores:
 
 ```bash
 Copiar código
 docker-compose up --build
-La aplicación estará disponible en http://localhost:8081.
 ```
+La aplicación estará disponible en http://localhost:8081.
 
 ## Nota:
 Al correr la aplicación correrá un pequeño script para llenar con información inicial la DB.
