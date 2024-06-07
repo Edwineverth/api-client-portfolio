@@ -69,3 +69,22 @@ func (h *PortfolioHandler) DeletePortfolio(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, result)
 }
+
+func (h *PortfolioHandler) DeleteAllPortfoliosByCustomerCode(c *gin.Context) {
+	customerCode := c.Param("id")
+	result, err := h.PortfolioRepo.DeleteAllPortfoliosByCustomerCode(context.Background(), customerCode)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	}
+	c.JSON(http.StatusOK, result)
+}
+
+func (h *PortfolioHandler) GetPortfoliosByClientId(c *gin.Context) {
+	clientId := c.Param("id")
+	portfolios, err := h.PortfolioRepo.GetPortfoliosByClientId(context.Background(), clientId)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, portfolios)
+}

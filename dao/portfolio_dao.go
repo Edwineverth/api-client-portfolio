@@ -52,3 +52,27 @@ func (dao *PortfolioDAO) UpdatePortfolio(ctx context.Context, id string, update 
 func (dao *PortfolioDAO) DeletePortfolio(ctx context.Context, id string) (*mongo.DeleteResult, error) {
 	return dao.Collection.DeleteOne(ctx, bson.M{"route": id})
 }
+
+func (dao *PortfolioDAO) DeleteAllPortfoliosByCustomerCode(ctx context.Context, customerCode string) (*mongo.DeleteResult, error) {
+	filter := bson.M{"customerCode": customerCode}
+	return dao.Collection.DeleteMany(ctx, filter)
+}
+
+func (dao *PortfolioDAO) GetPortfoliosByClientId(ctx context.Context, clientId string) ([]map[string]interface{}, error) {
+	var results []map[string]interface{}
+	cursor, err := dao.Collection.Find(ctx, bson.M{"customerCode": clientId})
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(ctx)
+
+	for cursor.Next(ctx) {
+		var result map[string]interface{}
+		cursor.Decode(&result)
+		results = append(results, result)
+	}
+	if err := cursor.Err(); err != nil {
+		return nil, err
+	}
+	return results, nil
+}

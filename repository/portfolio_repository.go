@@ -30,3 +30,11 @@ func (r *PortfolioRepository) UpdatePortfolio(ctx context.Context, id string, up
 func (r *PortfolioRepository) DeletePortfolio(ctx context.Context, id string) (*mongo.DeleteResult, error) {
 	return r.PortfolioDAO.DeletePortfolio(ctx, id)
 }
+
+func (r *PortfolioRepository) DeleteAllPortfoliosByCustomerCode(ctx context.Context, customerCode string) (*mongo.DeleteResult, error) {
+	return r.PortfolioDAO.DeleteAllPortfoliosByCustomerCode(ctx, customerCode)
+}
+
+func (r *PortfolioRepository) GetPortfoliosByClientId(ctx context.Context, clientId string) ([]map[string]interface{}, error) {
+	return r.PortfolioDAO.GetPortfoliosByClientId(ctx, clientId)
+}

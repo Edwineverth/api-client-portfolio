@@ -50,6 +50,8 @@ func main() {
 	router.POST("/portfolios", portfolioHandler.CreatePortfolio)
 	router.PUT("/portfolios/:id", portfolioHandler.UpdatePortfolio)
 	router.DELETE("/portfolios/:id", portfolioHandler.DeletePortfolio)
+	router.DELETE("/portfolios/client/:id", portfolioHandler.DeleteAllPortfoliosByCustomerCode)
+	router.GET("/portfolios/client/:id", portfolioHandler.GetPortfoliosByClientId)
 
 	router.Run(":" + serverPort)
 }

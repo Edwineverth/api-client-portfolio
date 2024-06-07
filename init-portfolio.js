@@ -1,5 +1,6 @@
 db = db.getSiblingDB('portfolioDB');
 db.createCollection('client_portfolio');
+db.client_portfolio.createIndex({ route: 1 }, { unique: true });
 db.client_portfolio.insertMany([
     {
         "channel": "yalo",
